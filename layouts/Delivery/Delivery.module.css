@@ -1,0 +1,5 @@
+.container {
+  align-items: flex-end;
+  cursor: pointer;
+  display: flex;
+}
