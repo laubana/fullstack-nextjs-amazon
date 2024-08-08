@@ -6,7 +6,7 @@ import styles from "./Loader.module.css";
 export default () => {
   return (
     <div className={styles.loading}>
-      <BeatLoader color="#E32195" />
+      <BeatLoader color="#ffd814" />
     </div>
   );
 };

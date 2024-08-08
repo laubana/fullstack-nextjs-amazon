@@ -16,12 +16,12 @@ const User = async () => {
   if (session && session.user) {
     return (
       <div style={{ position: "relative" }}>
-        <Link href="/">
+        <Link href="/profile">
           <div>
             <Text color="white" size={12}>
               Hello, {session.user.name}
             </Text>
-            <Text color="white" size={14} weight={700}>
+            <Text color="white" weight={700}>
               Account & Lists <FaChevronDown size={8} />
             </Text>
           </div>
@@ -30,11 +30,15 @@ const User = async () => {
     );
   } else {
     return (
-      <div>
-        <Text color="white">Hello, sign in</Text>
-        <Text color="white" size={14} weight={700}>
-          Account & Lists
-        </Text>
+      <div style={{ position: "relative" }}>
+        <Link href="/auth/sign-in">
+          <div>
+            <Text color="white">Hello, sign in</Text>
+            <Text color="white" weight={700}>
+              Account & Lists
+            </Text>
+          </div>
+        </Link>
       </div>
     );
   }
@@ -52,19 +56,27 @@ export default () => {
           style={{ margin: "8px 0" }}
         />
       </Link>
-      <Delivery />
-      <Select options={[{ value: "test", label: "Test" }]} />
+      {/* <Delivery /> */}
+      <Select
+        options={[
+          { value: "test1", label: "Test 1" },
+          { value: "test2", label: "Test 2" },
+          { value: "test3", label: "Test 3" },
+          { value: "test4", label: "Test 4" },
+          { value: "test5", label: "Test 5" },
+        ]}
+      />
       <User />
       <Link href="/">
         <div>
           <Text color="white">Returns</Text>
-          <Text color="white" size={14} weight={700}>
+          <Text color="white" weight={700}>
             & Orders
           </Text>
         </div>
       </Link>
       <Link href="/">
-        <Text color="white" size={14} weight={700}>
+        <Text color="white" weight={700}>
           Cart
         </Text>
       </Link>

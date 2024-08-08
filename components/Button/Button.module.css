@@ -1,0 +1,45 @@
+.block {
+  display: block;
+  width: 100%;
+}
+
+.button {
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.color-white {
+  background-color: white;
+  border: 1px #ddd solid;
+  color: black;
+
+  &:hover {
+    background-color: #f7fafa;
+  }
+}
+
+.color-yellow {
+  background-color: #ffd814;
+  color: black;
+
+  &:hover {
+    background-color: #f7ca00;
+  }
+}
+
+.nopadding {
+  padding: 0;
+}
+
+.padding-small {
+  padding: 4px 8px;
+}
+.padding-medium {
+  padding: 6px 12px;
+}
+
+.padding-large {
+  padding: 8px 16px;
+}

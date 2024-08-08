@@ -2,17 +2,21 @@ import styles from "./Text.module.css";
 import { TextProps } from "./Text.props";
 
 export default (props: TextProps) => {
-  const { children, color = "black", size = 16, style, weight = 400 } = props;
+  const {
+    alignment = "left",
+    children,
+    color = "black",
+    size = "medium",
+    style,
+    weight = "regular",
+  } = props;
 
   return (
     <div
-      className={styles.text}
-      style={{
-        color: color,
-        fontSize: `${size}px`,
-        fontWeight: weight,
-        ...style,
-      }}
+      className={`${styles[`alignment-${alignment}`]} ${
+        styles[`color-${color}`]
+      } ${styles[`font-${size}`]} ${styles[`weight-${weight}`]} ${styles.text}`}
+      style={{ ...style }}
     >
       {children}
     </div>

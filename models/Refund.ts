@@ -3,6 +3,11 @@ import { DB } from "@/const/db";
 
 const RefundSchema = new Schema(
   {
+    product: {
+      type: Schema.Types.ObjectId,
+      ref: DB.Product,
+      required: [true, "Product is required."],
+    },
     quantity: {
       type: Number,
       required: [true, "Quantity is required."],
@@ -11,16 +16,6 @@ const RefundSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: DB.Transaction,
       required: [true, "Transaction is required."],
-    },
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: DB.User,
-      required: [true, "User is required."],
-    },
-    variant: {
-      type: Schema.Types.ObjectId,
-      ref: DB.Variant,
-      required: [true, "Variant is required."],
     },
   },
   {

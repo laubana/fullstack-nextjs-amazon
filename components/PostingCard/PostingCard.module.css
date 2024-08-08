@@ -1,0 +1,19 @@
+.image {
+  aspect-ratio: 1;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.price-container {
+  align-items: flex-start;
+  display: flex;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+}

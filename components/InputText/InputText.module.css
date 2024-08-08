@@ -1,0 +1,52 @@
+.container {
+  width: 100%;
+}
+
+.component-container {
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
+  display: flex;
+}
+
+.font-small {
+  font-size: 14px;
+}
+
+.font-medium {
+  font-size: 16px;
+}
+
+.font-large {
+  font-size: 18px;
+}
+
+.input {
+  border: none;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.input-container {
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: flex;
+  gap: 8px;
+}
+
+.padding-small {
+  padding: 4px 6px;
+}
+
+.padding-medium {
+  padding: 6px 8px;
+}
+
+.padding-large {
+  padding: 8px 10px;
+}

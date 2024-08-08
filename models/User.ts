@@ -4,18 +4,21 @@ import { DB } from "@/const/db";
 const UserSchema = new Schema(
   {
     email: {
+      required: [true, "Email is required."],
       type: String,
       unique: [true, "Email already exsits."],
-      required: [true, "Email is required."],
-    },
-    image: {
-      type: String,
     },
     name: {
-      type: String,
       required: [true, "Name is required."],
+      type: String,
     },
     password: {
+      type: String,
+    },
+    role: {
+      default: "user",
+      enum: ["user", "admin"],
+      required: [true, "Role is required."],
       type: String,
     },
   },

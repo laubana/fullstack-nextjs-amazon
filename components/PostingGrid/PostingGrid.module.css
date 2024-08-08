@@ -1,0 +1,11 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.posting-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  min-width: 0;
+}

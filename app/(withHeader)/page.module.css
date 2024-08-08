@@ -1,0 +1,12 @@
+.flex {
+  display: flex;
+  padding: 64px;
+}
+
+.left {
+  min-width: 360px;
+}
+
+.right {
+  flex-grow: 1;
+}

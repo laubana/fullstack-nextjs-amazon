@@ -1,5 +1,57 @@
+.alignment-center {
+  justify-content: center;
+}
+
+.alignment-left {
+  justify-content: flex-start;
+}
+
+.alignment-right {
+  justify-content: flex-end;
+}
+
+.color-black {
+  color: #0f1111;
+}
+
+.color-green {
+  color: #007600;
+}
+
+.color-grey {
+  color: #565959;
+}
+
+.color-red {
+  color: #cc0c39;
+}
+
+.font-large {
+  font-size: 16px;
+}
+
+.font-medium {
+  font-size: 14px;
+}
+
+.font-small {
+  font-size: 12px;
+}
+
 .text {
   align-items: center;
-  display: "flex";
+  display: flex;
   font-family: "Amazon Ember", Arial, sans-serif;
+}
+
+.weight-bold {
+  font-weight: 700;
+}
+
+.weight-light {
+  font-weight: 300;
+}
+
+.weight-regular {
+  font-weight: 400;
 }

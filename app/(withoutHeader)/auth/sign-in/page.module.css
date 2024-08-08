@@ -2,6 +2,10 @@
   height: auto;
 }
 
+.button-container {
+  align-self: stretch;
+}
+
 .container {
   align-items: center;
   display: flex;
@@ -11,6 +15,16 @@
   max-width: 360px;
   padding: 16px;
   width: 100%;
+}
+
+.divider {
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .wrapper {

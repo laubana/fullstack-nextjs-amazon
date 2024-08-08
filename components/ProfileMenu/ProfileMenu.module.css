@@ -1,0 +1,7 @@
+.container {
+  border: 1px #ddd solid;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 16px;
+  width: 100%;
+}

@@ -78,7 +78,7 @@ export default (props: DeliveryProps) => {
           <Text color="#CCCCCC" size={12}>
             {name}
           </Text>
-          <Text color="white" size={14} weight={700}>
+          <Text color="white" weight={700}>
             {address}
           </Text>
         </div>

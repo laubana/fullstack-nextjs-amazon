@@ -1,3 +1,4 @@
+import bcryptjs from "bcryptjs";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -13,7 +14,6 @@ export const authOptions: AuthOptions = {
     }),
     CredentialsProvider({
       authorize: async (credentials) => {
-        console.log(credentials);
         return credentials ?? null;
       },
       credentials: {
@@ -32,8 +32,8 @@ export const authOptions: AuthOptions = {
         session.user = {
           email: user.email,
           id: user.id,
-          image: user.image,
           name: user.name,
+          role: user.role,
         };
       }
 
@@ -43,30 +43,36 @@ export const authOptions: AuthOptions = {
       try {
         await db();
 
-        const user =
-          account?.type === "oauth"
-            ? await User.findOne({
-                email: profile?.email,
-              })
-            : await User.findOne({
-                email: credentials?.email,
-                password: credentials?.password,
-              });
+        const user = await User.findOne({
+          email:
+            account?.type === "oauth" ? profile?.email : credentials?.email,
+        });
 
         if (user) {
-          return true;
+          if (account?.type === "oauth") {
+            return true;
+          } else {
+            const isMatch = await bcryptjs.compare(
+              credentials?.password as string,
+              user.password
+            );
+
+            if (isMatch) {
+              return true;
+            } else {
+              return false;
+            }
+          }
         } else {
           if (account?.type === "oauth") {
             await User.create({
               email: profile?.email,
-              image: profile?.picture,
               name: profile?.name,
-              password: "123123",
             });
 
             return true;
           } else {
-            return "/";
+            return false;
           }
         }
       } catch (error) {
@@ -84,14 +90,8 @@ declare module "next-auth" {
       id: string;
       email: string;
       name: string;
-      image: string;
+      role: string;
     } | null;
-  }
-}
-
-declare module "next-auth" {
-  interface Profile {
-    picture?: string;
   }
 }
 

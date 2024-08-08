@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export default async () => {
   try {
-    mongoose.set("strictQuery", true);
+    mongoose.set("strictQuery", false);
 
     if (process.env.MONGO_URI) {
       await mongoose.connect(process.env.MONGO_URI);
