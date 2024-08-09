@@ -1,0 +1,41 @@
+.cart-container {
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  padding: 16px 0;
+
+  &:first-child {
+    border-top: 1px solid #ddd;
+  }
+}
+
+.checkbox-container {
+  padding: 32px;
+}
+
+.container {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 8fr 2fr;
+}
+
+.left {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.price-container {
+  display: flex;
+  gap: 4px;
+}
+
+.right {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}

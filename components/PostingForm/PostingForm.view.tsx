@@ -2,6 +2,7 @@
 
 import { Formik } from "formik";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import styles from "./PostingForm.module.css";
 import { PostingFormProps } from "./PostingForm.props";
@@ -14,18 +15,17 @@ import Text from "@/components/Text";
 import { addPosting } from "@/services/posting";
 import { addPrice } from "@/services/price";
 import { addProduct } from "@/services/product";
-import { Posting, PostingForm } from "@/types/Posting";
+import { Posting, PostingFormValues } from "@/types/Posting";
 import { Price } from "@/types/Price";
-import { ProductForm as PF } from "@/types/Product";
+import { ProductFormValues } from "@/types/Product";
 
 export default (props: PostingFormProps) => {
   const { categories = [] } = props;
 
-  const [error, setError] = useState<string>("");
   const [isProductVisible, setIsProductVisible] = useState<boolean>(false);
-  const [products, setProducts] = useState<PF[]>([]);
+  const [products, setProducts] = useState<ProductFormValues[]>([]);
 
-  const initialValues: PostingForm = {
+  const initialValues: PostingFormValues = {
     categoryId: "",
     productNumber: 0,
     title: "",
@@ -47,12 +47,12 @@ export default (props: PostingFormProps) => {
     setIsProductVisible(false);
   };
 
-  const handleConfirmProduct = (props: PF) => {
-    setProducts((prevState) => [...prevState, { ...props }]);
+  const handleConfirmProduct = (values: ProductFormValues) => {
+    setProducts((prevState) => [...prevState, { ...values }]);
     setIsProductVisible(false);
   };
 
-  const handleSubmit = async (values: PostingForm) => {
+  const handleSubmit = async (values: PostingFormValues) => {
     const postingFormData = new FormData();
     postingFormData.append("categoryId", values.categoryId);
     postingFormData.append("title", values.title);
@@ -86,15 +86,16 @@ export default (props: PostingFormProps) => {
           const productResponse = await addProduct(productFormData);
 
           if (productResponse.ok) {
+            toast.success(productResponse.message);
           } else {
-            setError(productResponse.message);
+            toast.error(productResponse.message);
           }
         } else {
-          setError(priceResponse.message);
+          toast.error(priceResponse.message);
         }
       }
     } else {
-      setError(postingResponse.message);
+      toast.error(postingResponse.message);
     }
   };
 
@@ -167,7 +168,6 @@ export default (props: PostingFormProps) => {
               ) : null}
             </div>
             <Button onClick={handleSubmit}>Post</Button>
-            {error ? <Text color="red">{error}</Text> : null}
           </>
         )}
       </Formik>

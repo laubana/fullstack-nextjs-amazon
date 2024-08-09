@@ -3,10 +3,6 @@ export type Category = {
   name: string;
 };
 
-export type CategoryForm = {
-  name: string;
-};
-
-export type CategoryPayload = {
+export type CategoryFormValues = {
   name: string;
 };

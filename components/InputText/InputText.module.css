@@ -1,7 +1,3 @@
-.container {
-  width: 100%;
-}
-
 .component-container {
   align-items: center;
   background-color: white;
@@ -9,16 +5,20 @@
   display: flex;
 }
 
-.font-small {
-  font-size: 14px;
+.container {
+  width: 100%;
+}
+
+.font-large {
+  font-size: 18px;
 }
 
 .font-medium {
   font-size: 16px;
 }
 
-.font-large {
-  font-size: 18px;
+.font-small {
+  font-size: 14px;
 }
 
 .input {
@@ -39,14 +39,14 @@
   gap: 8px;
 }
 
-.padding-small {
-  padding: 4px 6px;
+.padding-large {
+  padding: 8px 10px;
 }
 
 .padding-medium {
   padding: 6px 8px;
 }
 
-.padding-large {
-  padding: 8px 10px;
+.padding-small {
+  padding: 4px 6px;
 }

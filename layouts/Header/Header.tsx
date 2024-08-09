@@ -3,25 +3,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaChevronDown } from "react-icons/fa";
 import styles from "./Header.module.css";
-import Delivery from "../Delivery";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOption";
 import Select from "@/components/Search";
 import Text from "@/components/Text";
+import Delivery from "@/layouts/Delivery";
+import { getAllCategories } from "@/services/category";
+import { Category } from "@/types/Category";
 
 const User = async () => {
   const session = await getServerSession(authOptions);
-
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
 
   if (session && session.user) {
     return (
       <div style={{ position: "relative" }}>
         <Link href="/profile">
           <div>
-            <Text color="white" size={12}>
+            <Text color="white" size="small">
               Hello, {session.user.name}
             </Text>
-            <Text color="white" weight={700}>
+            <Text color="white" weight="bold">
               Account & Lists <FaChevronDown size={8} />
             </Text>
           </div>
@@ -34,7 +34,7 @@ const User = async () => {
         <Link href="/auth/sign-in">
           <div>
             <Text color="white">Hello, sign in</Text>
-            <Text color="white" weight={700}>
+            <Text color="white" weight="bold">
               Account & Lists
             </Text>
           </div>
@@ -44,7 +44,11 @@ const User = async () => {
   }
 };
 
-export default () => {
+export default async () => {
+  const categoriesResponse = await getAllCategories();
+
+  const categories = categoriesResponse.data as Category[];
+
   return (
     <header className={styles.header}>
       <Link href="/">
@@ -58,25 +62,22 @@ export default () => {
       </Link>
       {/* <Delivery /> */}
       <Select
-        options={[
-          { value: "test1", label: "Test 1" },
-          { value: "test2", label: "Test 2" },
-          { value: "test3", label: "Test 3" },
-          { value: "test4", label: "Test 4" },
-          { value: "test5", label: "Test 5" },
-        ]}
+        options={categories.map((category) => ({
+          label: category.name,
+          value: category._id,
+        }))}
       />
       <User />
       <Link href="/">
         <div>
           <Text color="white">Returns</Text>
-          <Text color="white" weight={700}>
+          <Text color="white" weight="bold">
             & Orders
           </Text>
         </div>
       </Link>
-      <Link href="/">
-        <Text color="white" weight={700}>
+      <Link href="/carts">
+        <Text color="white" weight="bold">
           Cart
         </Text>
       </Link>

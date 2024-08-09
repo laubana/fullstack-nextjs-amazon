@@ -5,14 +5,8 @@ export type User = {
   role: string;
 };
 
-export type UserForm = {
+export type UserFormValues = {
   confirmPassword: string;
-  email: string;
-  name: string;
-  password: string;
-};
-
-export type UserPayload = {
   email: string;
   name: string;
   password: string;

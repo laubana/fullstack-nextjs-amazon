@@ -75,10 +75,10 @@ export default (props: DeliveryProps) => {
           <IoLocationOutline size={24} />
         </Text>
         <div>
-          <Text color="#CCCCCC" size={12}>
+          <Text color="light-grey" size="small">
             {name}
           </Text>
-          <Text color="white" weight={700}>
+          <Text color="white" weight="bold">
             {address}
           </Text>
         </div>

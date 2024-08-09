@@ -8,14 +8,9 @@ export type Posting = {
   user: User;
 };
 
-export type PostingForm = {
+export type PostingFormValues = {
   [key: string]: any;
   categoryId: string;
   productNumber: number;
-  title: string;
-};
-
-export type PostingPayload = {
-  categoryId: string;
   title: string;
 };

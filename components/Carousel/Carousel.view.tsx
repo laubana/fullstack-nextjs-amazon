@@ -2,9 +2,8 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import { CarouselProps } from "./Carousel.props";
-
 import styles from "./Carousel.module.css";
+import { CarouselProps } from "./Carousel.props";
 
 import "swiper/css";
 import "swiper/css/navigation";

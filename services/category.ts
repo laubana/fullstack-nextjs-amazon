@@ -4,12 +4,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOption";
 import db from "@/configs/db";
 import Category from "@/models/Category";
-import { CategoryPayload } from "@/types/Category";
 
-export const addCategory = async (props: CategoryPayload) => {
+export const addCategory = async (props: FormData) => {
   try {
     const session = await getServerSession(authOptions);
-    const { name } = props;
+    const name = props.get("name") as string;
     const role = session?.user?.role;
 
     if (!name) {

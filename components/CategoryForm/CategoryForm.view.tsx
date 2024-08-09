@@ -1,19 +1,19 @@
 "use client";
 
 import { Formik } from "formik";
-import { useState } from "react";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import styles from "./CategoryForm.module.css";
+import { CategoryFormProps } from "./CategoryForm.props";
 import Button from "@/components/Button";
 import InputText from "@/components/InputText";
-import Text from "@/components/Text";
 import { addCategory } from "@/services/category";
-import { CategoryForm } from "@/types/Category";
+import { CategoryFormValues } from "@/types/Category";
 
-export default () => {
-  const [error, setError] = useState<string>("");
+export default (props: CategoryFormProps) => {
+  const {} = props;
 
-  const initialValues: CategoryForm = {
+  const initialValues: CategoryFormValues = {
     name: "name",
   };
 
@@ -21,11 +21,15 @@ export default () => {
     name: Yup.string().required("Name is required."),
   });
 
-  const handleSubmit = async (values: CategoryForm) => {
-    const response = await addCategory(values);
+  const handleSubmit = async (values: CategoryFormValues) => {
+    const categoryFormData = new FormData();
+    categoryFormData.append("name", values.name);
+    const categoryResponse = await addCategory(categoryFormData);
 
-    if (!response.ok) {
-      setError(response.message);
+    if (categoryResponse.ok) {
+      toast.success(categoryResponse.message);
+    } else {
+      toast.error(categoryResponse.message);
     }
   };
 
@@ -47,7 +51,6 @@ export default () => {
               text={values.name}
             />
             <Button onClick={() => handleSubmit()}>Add</Button>
-            {error ? <Text color="red">{error}</Text> : null}
           </>
         )}
       </Formik>

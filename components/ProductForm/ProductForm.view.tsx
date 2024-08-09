@@ -7,16 +7,16 @@ import * as Yup from "yup";
 import styles from "./ProductForm.module.css";
 import { ProductFormProps } from "./ProductForm.props";
 import Button from "@/components/Button";
-import InputText from "@/components/InputText";
 import InputMultipleImage from "@/components/InputMultipleImage";
-import { ProductForm } from "@/types/Product";
+import InputText from "@/components/InputText";
+import { ProductFormValues } from "@/types/Product";
 
 export default (props: ProductFormProps) => {
   const { onCancel, onConfirm } = props;
 
   const [images, setImages] = useState<ImageType[]>([]);
 
-  const initialValues: ProductForm = {
+  const initialValues: ProductFormValues = {
     description: "",
     imageNumber: 0,
     images: [],
@@ -47,7 +47,7 @@ export default (props: ProductFormProps) => {
     onCancel();
   };
 
-  const handleSubmit = async (values: ProductForm) => {
+  const handleSubmit = async (values: ProductFormValues) => {
     onConfirm({ ...values, images });
   };
 

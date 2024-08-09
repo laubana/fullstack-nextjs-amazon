@@ -1,6 +1,6 @@
-import { ProductForm } from "@/types/Product";
+import { ProductFormValues } from "@/types/Product";
 
 export interface ProductFormProps {
   onCancel: () => void;
-  onConfirm: (props: ProductForm) => void;
+  onConfirm: (values: ProductFormValues) => void;
 }

@@ -12,21 +12,12 @@ export type Product = {
   quantity: number;
 };
 
-export type ProductForm = {
+export type ProductFormValues = {
   [key: string]: any;
   description: string;
   imageNumber: number;
   images: ImageType[];
   name: string;
   price: string;
-  quantity: string;
-};
-
-export type ProductPayload = {
-  description: string;
-  images: (File | undefined)[];
-  name: string;
-  postingId: string;
-  priceId: string;
   quantity: string;
 };

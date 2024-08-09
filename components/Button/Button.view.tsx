@@ -7,6 +7,7 @@ export default (props: ButtonProps) => {
     block,
     children,
     color = "yellow",
+    disabled,
     nopadding,
     onClick,
     size = "medium",
@@ -18,8 +19,9 @@ export default (props: ButtonProps) => {
       className={`${styles.button} ${styles[`color-${color}`]} ${
         styles[`padding-${size}`]
       } ${block ? styles.block : null} ${nopadding ? styles.nopadding : null}`}
-      type={type}
+      disabled={disabled}
       onClick={onClick}
+      type={type}
     >
       <Text alignment="center" size={size}>
         {children}

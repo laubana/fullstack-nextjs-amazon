@@ -12,13 +12,13 @@ import InputPassword from "@/components/InputPassword";
 import InputText from "@/components/InputText";
 import Text from "@/components/Text";
 import { signUp } from "@/services/auth";
-import { UserForm } from "@/types/User";
+import { UserFormValues } from "@/types/User";
 
 export default () => {
   const router = useRouter();
   const [error, setError] = useState<string>("");
 
-  const initialValues: UserForm = {
+  const initialValues: UserFormValues = {
     confirmPassword: "123123",
     email: "laubana@gmail.com",
     name: "Test User",
@@ -37,13 +37,17 @@ export default () => {
       .min(6, "Password must be at least 6 characters."),
   });
 
-  const handleSubmit = async (values: UserForm) => {
-    const response = await signUp(values);
+  const handleSubmit = async (values: UserFormValues) => {
+    const signUpFormData = new FormData();
+    signUpFormData.append("email", values.email);
+    signUpFormData.append("name", values.name);
+    signUpFormData.append("password", values.password);
+    const signUpResponse = await signUp(signUpFormData);
 
-    if (response.ok) {
+    if (signUpResponse.ok) {
       router.push("/sign-in");
     } else {
-      setError(response.message);
+      setError(signUpResponse.message);
     }
   };
 

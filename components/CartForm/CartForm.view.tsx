@@ -1,6 +1,8 @@
 "use client";
 
 import { Formik } from "formik";
+import { useState } from "react";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import styles from "./CartForm.module.css";
 import { CartFormProps } from "./CartForm.props";
@@ -8,16 +10,15 @@ import AutoComplete from "@/components/AutoComplete";
 import Button from "@/components/Button";
 import Loader from "@/components/Loader";
 import Text from "@/components/Text";
-import { CartForm } from "@/types/Cart";
 import { addCart } from "@/services/cart";
-import { useState } from "react";
+import { CartFormValues } from "@/types/Cart";
 
 export default (props: CartFormProps) => {
   const { productId, quantity } = props;
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const initialValues: CartForm = {
+  const initialValues: CartFormValues = {
     quantity: "",
   };
 
@@ -29,7 +30,7 @@ export default (props: CartFormProps) => {
       .integer("Quantity must be an integer."),
   });
 
-  const handleSubmit = async (values: CartForm) => {
+  const handleSubmit = async (values: CartFormValues) => {
     setIsSubmitting(true);
 
     const cartFormData = new FormData();
@@ -38,7 +39,9 @@ export default (props: CartFormProps) => {
     const cartResponse = await addCart(cartFormData);
 
     if (cartResponse.ok) {
+      toast.success(cartResponse.message);
     } else {
+      toast.error(cartResponse.message);
     }
 
     setIsSubmitting(false);
@@ -66,13 +69,13 @@ export default (props: CartFormProps) => {
           <>
             <AutoComplete
               error={touched.quantity ? errors.quantity : ""}
-              options={Array.from(
-                { length: quantity },
-                (_, i) => quantity - i
-              ).map((quantity) => ({
-                label: quantity.toString(),
-                value: quantity.toString(),
-              }))}
+              option={{ label: "1", value: "1" }}
+              options={Array.from({ length: quantity }, (_, i) => quantity - i)
+                .map((quantity) => ({
+                  label: quantity.toString(),
+                  value: quantity.toString(),
+                }))
+                .reverse()}
               setOption={(option) => {
                 if (option?.value) {
                   setFieldValue("quantity", option.value);
@@ -81,8 +84,12 @@ export default (props: CartFormProps) => {
                 }
               }}
             />
-            <Button onClick={handleSubmit}>
-              {isSubmitting ? "L" : "Add to Card"}
+            <Button
+              color="yellow"
+              onClick={handleSubmit}
+              disabled={isSubmitting ? true : false}
+            >
+              {isSubmitting ? <Loader /> : "Add to Card"}
             </Button>
           </>
         )}

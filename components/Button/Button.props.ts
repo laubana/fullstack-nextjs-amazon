@@ -8,6 +8,7 @@ export interface ButtonProps {
   block?: boolean;
   children: ReactNode;
   color?: Color;
+  disabled?: boolean;
   nopadding?: boolean;
   onClick?: () => void;
   size?: Size;

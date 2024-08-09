@@ -3,11 +3,12 @@
 import bcryptjs from "bcryptjs";
 import db from "@/configs/db";
 import User from "@/models/User";
-import { UserPayload } from "@/types/User";
 
-export const signUp = async (props: UserPayload) => {
+export const signUp = async (props: FormData) => {
   try {
-    const { email, name, password } = props;
+    const email = props.get("email") as string;
+    const name = props.get("name") as string;
+    const password = props.get("password") as string;
 
     if (!email || !name || !password) {
       return { message: "Invalid Input", ok: false };

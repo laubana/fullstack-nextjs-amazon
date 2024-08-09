@@ -15,6 +15,16 @@
   border: 1px #ddd solid;
   color: black;
 
+  &:disabled {
+    background-color: #e6e6e6;
+    cursor: default;
+  }
+
+  &:disabled:hover {
+    background-color: #e6e6e6;
+    cursor: default;
+  }
+
   &:hover {
     background-color: #f7fafa;
   }
@@ -23,6 +33,15 @@
 .color-yellow {
   background-color: #ffd814;
   color: black;
+
+  &:disabled {
+    background-color: #e6e6e6;
+  }
+
+  &:disabled:hover {
+    background-color: #e6e6e6;
+    cursor: default;
+  }
 
   &:hover {
     background-color: #f7ca00;
@@ -33,13 +52,14 @@
   padding: 0;
 }
 
-.padding-small {
-  padding: 4px 8px;
+.padding-large {
+  padding: 8px 16px;
 }
+
 .padding-medium {
   padding: 6px 12px;
 }
 
-.padding-large {
-  padding: 8px 16px;
+.padding-small {
+  padding: 4px 8px;
 }

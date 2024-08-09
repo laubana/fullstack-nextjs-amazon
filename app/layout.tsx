@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { ReactNode } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,7 +16,14 @@ export default ({
 }>) => {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <ToastContainer
+          pauseOnFocusLoss={false}
+          position="top-center"
+          autoClose={2000}
+        />
+      </body>
     </html>
   );
 };

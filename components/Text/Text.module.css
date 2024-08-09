@@ -1,13 +1,13 @@
 .alignment-center {
-  justify-content: center;
+  text-align: center;
 }
 
 .alignment-left {
-  justify-content: flex-start;
+  text-align: left;
 }
 
 .alignment-right {
-  justify-content: flex-end;
+  text-align: right;
 }
 
 .color-black {
@@ -22,8 +22,16 @@
   color: #565959;
 }
 
+.color-light-grey {
+  color: #e6e6e6;
+}
+
 .color-red {
   color: #cc0c39;
+}
+
+.color-white {
+  color: #ffffff;
 }
 
 .font-large {
@@ -39,8 +47,6 @@
 }
 
 .text {
-  align-items: center;
-  display: flex;
   font-family: "Amazon Ember", Arial, sans-serif;
 }
 
