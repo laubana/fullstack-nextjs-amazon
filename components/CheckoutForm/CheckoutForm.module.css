@@ -1,0 +1,32 @@
+.container {
+}
+
+.divider {
+  width: 100%;
+}
+
+.header {
+  padding: 16px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.right {
+  border: 1px #ddd solid;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.wrapper {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 7fr 3fr;
+}

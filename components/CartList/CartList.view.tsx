@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import styles from "./CartList.module.css";
@@ -8,11 +9,16 @@ import Button from "@/components/Button";
 import CartCard from "@/components/CartCard";
 import Loader from "@/components/Loader";
 import Text from "@/components/Text";
+import { useStore } from "@/configs/store";
 import { editCart, getAllCarts, removeCart } from "@/services/cart";
 import { Cart, CartDeletePayload, CartEditPayload } from "@/types/Cart";
 
 export default (props: CartListProps) => {
   const {} = props;
+
+  const router = useRouter();
+
+  const test = useStore((state) => state.setCarts);
 
   const [carts, setCarts] = useState<Cart[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -53,6 +59,11 @@ export default (props: CartListProps) => {
     } else {
       toast.error(cartResponse.message);
     }
+  };
+
+  const handleProceed = async () => {
+    test(carts);
+    router.push("/checkout");
   };
 
   const handleToggle = (
@@ -151,7 +162,9 @@ export default (props: CartListProps) => {
                 ${(totalPrice / 100).toFixed(2)}
               </Text>
             </div>
-            <Button block>Proceed to Checkout</Button>
+            <Button block onClick={handleProceed}>
+              Proceed to Checkout
+            </Button>
           </div>
         </>
       )}

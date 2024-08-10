@@ -28,7 +28,8 @@
     "stripe": "^16.6.0",
     "swiper": "^11.1.9",
     "uuid": "^10.0.0",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@types/node": "^20",
