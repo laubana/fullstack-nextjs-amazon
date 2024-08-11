@@ -9,7 +9,9 @@ const s3 = new S3Client({
   region: process.env.AWS_REGION,
 });
 
-export const uploadImage = async ({ image }: { image: File }) => {
+export const uploadImage = async (props: { image: File }) => {
+  const { image } = props;
+
   const extension = image.name.split(".").pop();
   const filename = `${uuidv4()}.${extension}`;
 

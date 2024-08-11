@@ -3,6 +3,11 @@ import { DB } from "@/const/db";
 
 const UserSchema = new Schema(
   {
+    customerId: {
+      required: [true, "CustomerId is required."],
+      type: String,
+      unique: [true, "CustomerId already exsits."],
+    },
     email: {
       required: [true, "Email is required."],
       type: String,

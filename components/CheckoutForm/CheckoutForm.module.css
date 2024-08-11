@@ -25,6 +25,12 @@
   padding: 16px;
 }
 
+.stripe-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .wrapper {
   display: grid;
   gap: 16px;

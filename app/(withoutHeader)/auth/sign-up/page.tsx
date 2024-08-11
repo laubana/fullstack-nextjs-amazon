@@ -45,7 +45,7 @@ export default () => {
     const signUpResponse = await signUp(signUpFormData);
 
     if (signUpResponse.ok) {
-      router.push("/sign-in");
+      router.push("/auth/sign-in");
     } else {
       setError(signUpResponse.message);
     }
