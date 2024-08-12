@@ -1,11 +1,13 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
 import styles from "./CheckoutForm.module.css";
 import { CheckoutFormProps } from "./CheckoutForm.props";
 import Button from "@/components/Button";
+import PaymentMethodCard from "@/components/PaymentMethodCard";
 import SetupForm from "@/components/SetupForm";
 import Modal from "@/components/Modal";
 import Text from "@/components/Text";
@@ -19,6 +21,8 @@ const stripePromise = loadStripe(
 
 export default (props: CheckoutFormProps) => {
   const {} = props;
+
+  const router = useRouter();
 
   const carts = useStore.getState().carts;
 
@@ -54,11 +58,15 @@ export default (props: CheckoutFormProps) => {
   }, []);
 
   useEffect(() => {
-    setTotalItemNumber(
-      carts.reduce((sum, cart) => {
-        return sum + cart.quantity;
-      }, 0)
-    );
+    if (carts.length !== 0) {
+      setTotalItemNumber(
+        carts.reduce((sum, cart) => {
+          return sum + cart.quantity;
+        }, 0)
+      );
+    } else {
+      // router.push("/");
+    }
   }, [carts]);
 
   return (
@@ -74,14 +82,20 @@ export default (props: CheckoutFormProps) => {
             <Text style={{ fontSize: "18px" }} weight="bold">
               Choose a payment method
             </Text>
-            <div>
+            <div className={styles["payment-method-list-header-container"]}>
+              <div></div>
+              <div></div>
+              <Text color="grey">Expiry</Text>
+            </div>
+            <div className={styles["payment-method-list-body-container"]}>
               {paymentMethods.map((paymentMethod) => (
-                <div key={paymentMethod.id}>
-                  <Text>{paymentMethod.card.last4}</Text>
-                  <Text>
-                    {paymentMethod.card.exp_month} {paymentMethod.card.exp_year}
-                  </Text>
-                </div>
+                <PaymentMethodCard
+                  brand={paymentMethod.card.brand}
+                  expiry={`${paymentMethod.card.exp_month}/${paymentMethod.card.exp_year}`}
+                  paymentMethodId={paymentMethod.id}
+                  last4={paymentMethod.card.last4}
+                  key={paymentMethod.id}
+                />
               ))}
             </div>
             <Button color="white" onClick={handleOpen}>

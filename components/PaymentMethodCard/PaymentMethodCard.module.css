@@ -1,0 +1,9 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 7fr 2fr;
+}
+
+.left-container {
+  display: flex;
+  gap: 4px;
+}

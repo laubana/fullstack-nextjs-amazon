@@ -13,7 +13,9 @@ export default async () => {
 
   return (
     <div className={styles.container}>
-      <CheckoutForm />
+      <div className={styles.wrapper}>
+        <CheckoutForm />
+      </div>
     </div>
   );
 };

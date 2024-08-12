@@ -16,6 +16,17 @@
   padding: 16px;
 }
 
+.payment-method-list-body-container {
+}
+
+.payment-method-list-header-container {
+  border-bottom: 1px solid #565959;
+  display: grid;
+  grid-template-columns: 1fr 7fr 2fr;
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+}
+
 .right {
   border: 1px #ddd solid;
   border-radius: 8px;

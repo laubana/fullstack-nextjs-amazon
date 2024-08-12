@@ -8,8 +8,10 @@ export default async () => {
 
   return (
     <div className={styles.container}>
-      <Text style={{ fontSize: "28px" }}>Post Your Products</Text>
-      <PostingForm categories={categories.data} />
+      <div className={styles.wrapper}>
+        <Text style={{ fontSize: "28px" }}>Post Your Products</Text>
+        <PostingForm categories={categories.data} />
+      </div>
     </div>
   );
 };

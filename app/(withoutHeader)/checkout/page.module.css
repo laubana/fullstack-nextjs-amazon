@@ -1,4 +1,9 @@
 .container {
+  background-color: white;
+}
+
+.wrapper {
+  box-sizing: border-box;
   margin: auto;
   max-width: 1000px;
   padding: 0 16px;

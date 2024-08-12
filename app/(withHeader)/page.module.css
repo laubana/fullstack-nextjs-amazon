@@ -1,6 +1,5 @@
-.flex {
-  display: flex;
-  padding: 64px;
+.container {
+  background-color: white;
 }
 
 .left {
@@ -9,4 +8,10 @@
 
 .right {
   flex-grow: 1;
+}
+
+.wrapper {
+  box-sizing: border-box;
+  display: flex;
+  padding: 64px;
 }
