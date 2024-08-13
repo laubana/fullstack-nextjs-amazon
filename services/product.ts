@@ -107,10 +107,10 @@ export const getAllProducts = async () => {
 
     const products = await Product.find({})
       .populate({
-        path: DB.Posting.toLowerCase(),
+        path: DB.Posting,
       })
       .populate({
-        path: DB.Price.toLowerCase(),
+        path: DB.Price,
       });
 
     return {
@@ -136,10 +136,10 @@ export const getProducts = async (props: FormData) => {
 
     const products = await Product.find({ posting: postingId })
       .populate({
-        path: DB.Posting.toLowerCase(),
+        path: DB.Posting,
       })
       .populate({
-        path: DB.Price.toLowerCase(),
+        path: DB.Price,
       });
 
     return {

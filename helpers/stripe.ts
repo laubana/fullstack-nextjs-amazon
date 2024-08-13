@@ -2,6 +2,18 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET as string);
 
+export const confirmPaymentIntent = async (props: {
+  paymentIntentId: string;
+}) => {
+  const { paymentIntentId } = props;
+
+  const stripPaymentIntent = await stripe.paymentIntents.confirm(
+    paymentIntentId
+  );
+
+  return stripPaymentIntent;
+};
+
 export const createCustomer = async (props: {
   email: string;
   name: string;
@@ -11,6 +23,24 @@ export const createCustomer = async (props: {
   const stripeCustomer = await stripe.customers.create({ email, name });
 
   return stripeCustomer;
+};
+
+export const createPaymentIntent = async (props: {
+  amount: number;
+  customerId: string;
+  paymentMethodId: string;
+}) => {
+  const { amount, customerId, paymentMethodId } = props;
+
+  const stripPaymentIntent = await stripe.paymentIntents.create({
+    amount,
+    currency: "cad",
+    customer: customerId,
+    payment_method: paymentMethodId,
+    automatic_payment_methods: { allow_redirects: "never", enabled: true },
+  });
+
+  return stripPaymentIntent;
 };
 
 export const createPrice = async (props: {
@@ -48,6 +78,7 @@ export const createSetupIntent = async (props: { customerId: string }) => {
   const stripSetupIntent = await stripe.setupIntents.create({
     customer: customerId,
     automatic_payment_methods: {
+      allow_redirects: "never",
       enabled: true,
     },
   });

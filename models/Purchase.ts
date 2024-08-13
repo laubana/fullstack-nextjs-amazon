@@ -3,6 +3,10 @@ import { DB } from "@/const/db";
 
 const PurchaseSchema = new Schema(
   {
+    paymentIntentId: {
+      type: String,
+      required: [true, "PaymentIntentId is required."],
+    },
     product: {
       type: Schema.Types.ObjectId,
       ref: DB.Product,

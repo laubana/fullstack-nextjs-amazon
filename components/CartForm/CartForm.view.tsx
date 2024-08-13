@@ -36,6 +36,7 @@ export default (props: CartFormProps) => {
     const cartFormData = new FormData();
     cartFormData.append("productId", productId);
     cartFormData.append("quantity", values.quantity);
+
     const cartResponse = await addCart(cartFormData);
 
     if (cartResponse.ok) {

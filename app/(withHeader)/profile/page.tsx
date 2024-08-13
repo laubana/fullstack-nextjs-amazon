@@ -45,7 +45,7 @@ export default async () => {
               <ProfileMenu description={menu.description} title={menu.title} />
             </Link>
           ))}
-          {session && session.user.role === "admin" ? (
+          {session && session.user && session.user.role === "admin" ? (
             <>
               {admins.map((admin) => (
                 <Link href={admin.href} key={admin.href}>

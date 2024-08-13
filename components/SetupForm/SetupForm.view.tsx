@@ -58,7 +58,6 @@ export default (props: SetupFormProps) => {
             <PaymentElement
               options={{
                 business: { name: "Amazon" },
-                fields: { billingDetails: { address: "never" } },
               }}
             />
             <Text alignment="right" color="light-grey" size="small">
