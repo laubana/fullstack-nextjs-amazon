@@ -58,18 +58,20 @@ export default (props: PostingFormProps) => {
     postingFormData.append("title", values.title);
 
     const postingResponse = await addPosting(postingFormData);
+    const postingData = postingResponse.data as Posting;
 
     if (postingResponse.ok) {
-      const postingId = (postingResponse.data as Posting)._id;
+      const postingId = postingData._id;
 
       for (const product of products) {
         const priceFormData = new FormData();
         priceFormData.append("value", product.price);
 
         const priceResponse = await addPrice(priceFormData);
+        const priceData = priceResponse.data as Price;
 
         if (priceResponse.ok) {
-          const priceId = (priceResponse.data as Price)._id;
+          const priceId = priceData._id;
 
           const productFormData = new FormData();
           productFormData.append("description", product.description);

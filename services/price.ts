@@ -9,7 +9,7 @@ import User from "@/models/User";
 export const addPrice = async (props: FormData) => {
   try {
     const session = await getServerSession(authOptions);
-    const value = props.get("value");
+    const value = props.get("value") as string;
     const userId = session?.user?.id;
 
     if (!value) {
@@ -28,7 +28,7 @@ export const addPrice = async (props: FormData) => {
       return { message: "No user found.", ok: false };
     }
 
-    const price = await Price.create({ value });
+    const price = await Price.create({ value: +value });
 
     return {
       message: "Price created successfully.",

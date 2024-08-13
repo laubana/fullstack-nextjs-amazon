@@ -30,55 +30,57 @@ export default async ({ params }: { params: { params: string[] } }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.left}>
-        <Carousel
-          items={product.images.map((image) => (
-            <img className={styles.image} key={image} src={image} />
-          ))}
-        />
-      </div>
-      <div className={styles.center}>
-        <Text style={{ fontSize: "24px" }}>{product.name}</Text>
-        <div className={styles["price-container"]}>
-          <Text style={{ fontSize: "13px" }}>$</Text>
-          <Text style={{ fontSize: "28px", lineHeight: 1 }}>
-            {(+product.price.value / 100)
-              .toFixed(2)
-              .substring(
-                0,
-                (+product.price.value / 100).toFixed(2).indexOf(".")
-              )}
-          </Text>
-          <Text style={{ fontSize: "13px" }}>
-            {(+product.price.value / 100)
-              .toFixed(2)
-              .substring(
-                (+product.price.value / 100).toFixed(2).indexOf(".") + 1
-              )}
-          </Text>
+      <div className={styles.wrapper}>
+        <div className={styles.left}>
+          <Carousel
+            items={product.images.map((image) => (
+              <img className={styles.image} key={image} src={image} />
+            ))}
+          />
         </div>
-        <div className={styles["products-container"]}>
-          {products.map((product) => (
-            <Link
-              key={product._id}
-              href={`/postings/${postingId}/${product._id}`}
-            >
-              <img
-                src={product.images[0]}
-                style={{
-                  aspectRatio: 1,
-                  border: "1px solid red",
-                  borderRadius: "8px",
-                  width: "100%",
-                }}
-              />
-            </Link>
-          ))}
+        <div className={styles.center}>
+          <Text style={{ fontSize: "24px" }}>{product.name}</Text>
+          <div className={styles["price-container"]}>
+            <Text style={{ fontSize: "13px" }}>$</Text>
+            <Text style={{ fontSize: "28px", lineHeight: 1 }}>
+              {(+product.price.value / 100)
+                .toFixed(2)
+                .substring(
+                  0,
+                  (+product.price.value / 100).toFixed(2).indexOf(".")
+                )}
+            </Text>
+            <Text style={{ fontSize: "13px" }}>
+              {(+product.price.value / 100)
+                .toFixed(2)
+                .substring(
+                  (+product.price.value / 100).toFixed(2).indexOf(".") + 1
+                )}
+            </Text>
+          </div>
+          <div className={styles["products-container"]}>
+            {products.map((product) => (
+              <Link
+                key={product._id}
+                href={`/postings/${postingId}/${product._id}`}
+              >
+                <img
+                  src={product.images[0]}
+                  style={{
+                    aspectRatio: 1,
+                    border: "1px solid red",
+                    borderRadius: "8px",
+                    width: "100%",
+                  }}
+                />
+              </Link>
+            ))}
+          </div>
+          <Text>{product.description}</Text>
         </div>
-        <Text>{product.description}</Text>
-      </div>
-      <div className={styles.right}>
-        <CartForm productId={product._id} quantity={product.quantity} />
+        <div className={styles.right}>
+          <CartForm productId={product._id} quantity={product.quantity} />
+        </div>
       </div>
     </div>
   );

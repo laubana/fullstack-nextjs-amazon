@@ -5,7 +5,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/authOption";
 import db from "@/configs/db";
 import { DB } from "@/const/db";
 import { uploadImage } from "@/helpers/s3";
-import { createProduct } from "@/helpers/stripe";
+import { createPrice, createProduct } from "@/helpers/stripe";
 import Posting from "@/models/Posting";
 import User from "@/models/User";
 import Price from "@/models/Price";
@@ -66,10 +66,14 @@ export const addProduct = async (props: FormData) => {
       }
     }
 
-    const productId = await createProduct({
+    const stripeProduct = await createProduct({
       description,
       name,
+    });
+
+    await createPrice({
       price: price.value,
+      productId: stripeProduct.id,
     });
 
     const product = await Product.create({
@@ -78,7 +82,7 @@ export const addProduct = async (props: FormData) => {
       name,
       posting: postingId,
       price: priceId,
-      productId,
+      productId: stripeProduct.id,
       quantity: +quantity,
     });
 
@@ -103,10 +107,10 @@ export const getAllProducts = async () => {
 
     const products = await Product.find({})
       .populate({
-        path: DB.Posting.toLowerCase(),
+        path: DB.Posting,
       })
       .populate({
-        path: DB.Price.toLowerCase(),
+        path: DB.Price,
       });
 
     return {
@@ -132,10 +136,10 @@ export const getProducts = async (props: FormData) => {
 
     const products = await Product.find({ posting: postingId })
       .populate({
-        path: DB.Posting.toLowerCase(),
+        path: DB.Posting,
       })
       .populate({
-        path: DB.Price.toLowerCase(),
+        path: DB.Price,
       });
 
     return {

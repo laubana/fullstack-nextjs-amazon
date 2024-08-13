@@ -37,25 +37,27 @@ export default async () => {
 
   return (
     <div className={styles.container}>
-      <Text style={{ fontSize: "28px" }}>Your Account</Text>
-      <div className={styles.grid}>
-        {menus.map((menu) => (
-          <Link href={menu.href} key={menu.href}>
-            <ProfileMenu description={menu.description} title={menu.title} />
-          </Link>
-        ))}
-        {session && session.user.role === "admin" ? (
-          <>
-            {admins.map((admin) => (
-              <Link href={admin.href} key={admin.href}>
-                <ProfileMenu
-                  description={admin.description}
-                  title={admin.title}
-                />
-              </Link>
-            ))}
-          </>
-        ) : null}
+      <div className={styles.wrapper}>
+        <Text style={{ fontSize: "28px" }}>Your Account</Text>
+        <div className={styles.grid}>
+          {menus.map((menu) => (
+            <Link href={menu.href} key={menu.href}>
+              <ProfileMenu description={menu.description} title={menu.title} />
+            </Link>
+          ))}
+          {session && session.user && session.user.role === "admin" ? (
+            <>
+              {admins.map((admin) => (
+                <Link href={admin.href} key={admin.href}>
+                  <ProfileMenu
+                    description={admin.description}
+                    title={admin.title}
+                  />
+                </Link>
+              ))}
+            </>
+          ) : null}
+        </div>
       </div>
     </div>
   );

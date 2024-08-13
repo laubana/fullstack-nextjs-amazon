@@ -134,13 +134,13 @@ export const getAllCarts = async () => {
 
     const carts = await Cart.find({})
       .populate({
-        path: DB.Product.toLowerCase(),
+        path: DB.Product,
         populate: {
-          path: DB.Price.toLowerCase(),
+          path: DB.Price,
         },
       })
       .populate({
-        path: DB.User.toLowerCase(),
+        path: DB.User,
       });
 
     return {

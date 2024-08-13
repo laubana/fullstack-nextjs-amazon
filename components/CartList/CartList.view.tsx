@@ -17,8 +17,7 @@ export default (props: CartListProps) => {
   const {} = props;
 
   const router = useRouter();
-
-  const test = useStore((state) => state.setCarts);
+  const store = useStore();
 
   const [carts, setCarts] = useState<Cart[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -29,6 +28,7 @@ export default (props: CartListProps) => {
   const handleDelete = async (values: CartDeletePayload) => {
     const cartFormData = new FormData();
     cartFormData.append("cartId", values.cartId);
+
     const cartResponse = await removeCart(cartFormData);
 
     if (cartResponse.ok) {
@@ -45,6 +45,7 @@ export default (props: CartListProps) => {
     const cartFormData = new FormData();
     cartFormData.append("cartId", values.cartId);
     cartFormData.append("quantity", values.quantity);
+
     const cartResponse = await editCart(cartFormData);
 
     if (cartResponse.ok) {
@@ -62,7 +63,7 @@ export default (props: CartListProps) => {
   };
 
   const handleProceed = async () => {
-    test(carts);
+    store.setCarts(carts.filter((cart) => cartIds.includes(cart._id)));
     router.push("/checkout");
   };
 
@@ -84,10 +85,9 @@ export default (props: CartListProps) => {
       setIsLoading(true);
 
       const cartsResponse = await getAllCarts();
+      const cartsData = cartsResponse.data as Cart[];
 
-      const carts = cartsResponse.data as Cart[];
-
-      setCarts(carts);
+      setCarts(cartsData);
 
       setIsLoading(false);
     };

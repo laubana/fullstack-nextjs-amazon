@@ -3,6 +3,7 @@
 }
 
 .wrapper {
+  box-sizing: border-box;
   margin: auto;
   max-width: 1460px;
   padding: 32px 16px;

@@ -1,0 +1,18 @@
+.container {
+  border: 1px white solid;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr 7fr 2fr;
+  padding: 8px 16px;
+}
+
+.left-container {
+  display: flex;
+  gap: 4px;
+}
+
+.selected {
+  background-color: #fcf5ee;
+  border: 1px #fbd8b4 solid;
+  border-radius: 8px;
+}

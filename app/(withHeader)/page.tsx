@@ -25,9 +25,8 @@ export default () => {
   }, []);
 
   return (
-    <div>
-      <div></div>
-      <div className={styles.flex}>
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
         <div className={styles.left}></div>
         <div className={styles.right}>
           <Text style={{ fontSize: "20px" }} weight="bold">

@@ -2,6 +2,7 @@
 
 import bcryptjs from "bcryptjs";
 import db from "@/configs/db";
+import { createCustomer } from "@/helpers/stripe";
 import User from "@/models/User";
 
 export const signUp = async (props: FormData) => {
@@ -25,7 +26,10 @@ export const signUp = async (props: FormData) => {
     const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(password, salt);
 
+    const customer = await createCustomer({ name, email });
+
     await User.create({
+      customerId: customer.id,
       email,
       name,
       password: hashedPassword,

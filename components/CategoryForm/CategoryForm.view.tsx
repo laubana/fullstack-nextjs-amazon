@@ -24,6 +24,7 @@ export default (props: CategoryFormProps) => {
   const handleSubmit = async (values: CategoryFormValues) => {
     const categoryFormData = new FormData();
     categoryFormData.append("name", values.name);
+
     const categoryResponse = await addCategory(categoryFormData);
 
     if (categoryResponse.ok) {
