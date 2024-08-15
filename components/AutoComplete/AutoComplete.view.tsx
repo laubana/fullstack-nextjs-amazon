@@ -2,9 +2,12 @@
 
 import { ChangeEvent, FocusEvent, useEffect, useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
+
 import styles from "./AutoComplete.module.css";
 import { AutoCompleteProps } from "./AutoComplete.props";
+
 import Text from "@/components/Text";
+
 import { Option } from "@/types/Option";
 
 export default (props: AutoCompleteProps) => {

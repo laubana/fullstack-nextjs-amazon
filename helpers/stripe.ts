@@ -72,6 +72,20 @@ export const createProduct = async (props: {
   return stripeProduct;
 };
 
+export const createRefund = async (props: {
+  amount: number;
+  paymentIntentId: string;
+}) => {
+  const { amount, paymentIntentId } = props;
+
+  const stripeRefund = await stripe.refunds.create({
+    amount,
+    payment_intent: paymentIntentId,
+  });
+
+  return stripeRefund;
+};
+
 export const createSetupIntent = async (props: { customerId: string }) => {
   const { customerId } = props;
 

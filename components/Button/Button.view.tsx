@@ -1,5 +1,6 @@
 import styles from "./Button.module.css";
 import { ButtonProps } from "./Button.props";
+
 import Text from "@/components/Text";
 
 export default (props: ButtonProps) => {

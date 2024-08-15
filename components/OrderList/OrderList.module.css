@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
+
+.order-list-container {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}

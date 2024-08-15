@@ -3,18 +3,22 @@
 import { Formik } from "formik";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
+
 import styles from "./CategoryForm.module.css";
 import { CategoryFormProps } from "./CategoryForm.props";
+
 import Button from "@/components/Button";
 import InputText from "@/components/InputText";
-import { addCategory } from "@/services/category";
+
+import { addCategory } from "@/controllers/category";
+
 import { CategoryFormValues } from "@/types/Category";
 
 export default (props: CategoryFormProps) => {
   const {} = props;
 
   const initialValues: CategoryFormValues = {
-    name: "name",
+    name: "",
   };
 
   const validationSchema = Yup.object({

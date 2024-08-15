@@ -13,12 +13,6 @@
   padding: 32px;
 }
 
-.container {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: 8fr 2fr;
-}
-
 .left {
   background-color: white;
   display: flex;
@@ -38,4 +32,10 @@
   flex-direction: column;
   gap: 16px;
   padding: 16px;
+}
+
+.wrapper {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 8fr 2fr;
 }

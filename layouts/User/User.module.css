@@ -1,0 +1,7 @@
+.modal {
+  background-color: white;
+  border: 1px #ddd solid;
+  border-radius: 4px;
+  padding: 16px;
+  position: absolute;
+}

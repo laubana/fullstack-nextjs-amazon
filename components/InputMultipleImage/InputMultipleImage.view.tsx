@@ -6,8 +6,10 @@ import ImageUploading, {
   ErrorsType,
   ImageListType,
 } from "react-images-uploading";
+
 import styles from "./InputMultipleImage.module.css";
 import { InputMultipleImageProps } from "./InputMultipleImage.props";
+
 import Text from "@/components/Text";
 
 export default (props: InputMultipleImageProps) => {

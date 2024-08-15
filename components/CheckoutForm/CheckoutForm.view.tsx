@@ -2,24 +2,26 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
+
 import styles from "./CheckoutForm.module.css";
 import { CheckoutFormProps } from "./CheckoutForm.props";
+
 import Button from "@/components/Button";
+import Modal from "@/components/Modal";
 import PaymentMethodCard from "@/components/PaymentMethodCard";
 import SetupForm from "@/components/SetupForm";
-import Modal from "@/components/Modal";
 import Text from "@/components/Text";
+
 import { useStore } from "@/configs/store";
-import { removeCart } from "@/services/cart";
-import { addPurchase } from "@/services/purchase";
-import { addPaymentIntent, getAllPaymentMethods } from "@/services/stripe";
-import { addTransaction } from "@/services/transaction";
-import { PaymentIntent } from "@/types/PaymentIntent";
+
+import { getAllPaymentMethods } from "@/controllers/stripe";
+
+import { checkout } from "@/services/checkout";
+
 import { PaymentMethod } from "@/types/PaymentMethod";
-import { Purchase } from "@/types/Purchase";
-import { Transaction } from "@/types/Transaction";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLIC as string
@@ -48,6 +50,7 @@ export default (props: CheckoutFormProps) => {
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
   const [selectedPaymentMethodIndex, setSelectedPaymentMethodIndex] =
     useState<number>(0);
+  const [isPlacing, setIsPlacing] = useState<boolean>(false);
 
   const handleCancel = () => {
     router.push("/carts");
@@ -67,42 +70,25 @@ export default (props: CheckoutFormProps) => {
 
   const handlePlaceOrder = async () => {
     if (paymentMethods[selectedPaymentMethodIndex].id) {
-      const paymentIntentFormData = new FormData();
-      paymentIntentFormData.append("amount", totalPrice.toString());
-      paymentIntentFormData.append(
+      setIsPlacing(true);
+
+      const checkoutFormData = new FormData();
+      for (const cart of carts) {
+        checkoutFormData.append("cartIds", cart._id);
+      }
+      checkoutFormData.append(
         "paymentMethodId",
         paymentMethods[selectedPaymentMethodIndex].id
       );
+      const checkoutResponse = await checkout(checkoutFormData);
 
-      const paymentIntentResponse = await addPaymentIntent(
-        paymentIntentFormData
-      );
-      const paymentIntentData = paymentIntentResponse.data as PaymentIntent;
-
-      if (paymentIntentResponse.ok) {
-        const transactionResponse = await addTransaction();
-        const transactionData = transactionResponse.data as Transaction;
-
-        if (transactionResponse.ok) {
-          for (const cart of carts) {
-            const purchaseFormData = new FormData();
-            purchaseFormData.append("paymentIntentId", paymentIntentData.id);
-            purchaseFormData.append("productId", cart.product._id);
-            purchaseFormData.append("quantity", cart.quantity.toString());
-            purchaseFormData.append("transactionId", transactionData._id);
-
-            const purchaseResponse = await addPurchase(purchaseFormData);
-            const purchaseData = purchaseResponse.data as Purchase;
-
-            if (purchaseResponse.ok) {
-              const cartFormData = new FormData();
-              cartFormData.append("cartId", cart._id);
-
-              await removeCart(cartFormData);
-            }
-          }
-        }
+      if (checkoutResponse.ok) {
+        router.push("/");
+      } else {
+        toast.error(checkoutResponse.message);
       }
+
+      setIsPlacing(false);
     }
   };
 
@@ -130,7 +116,7 @@ export default (props: CheckoutFormProps) => {
         }, 0)
       );
     } else {
-      // router.push("/");
+      router.push("/");
     }
   }, [carts]);
 
@@ -175,8 +161,8 @@ export default (props: CheckoutFormProps) => {
             </div>
           </div>
           <div className={styles.right}>
-            <Button block onClick={handlePlaceOrder}>
-              Place Your Order
+            <Button block disabled={isPlacing} onClick={handlePlaceOrder}>
+              Proceed to Checkout
             </Button>
             <Button color="white" block onClick={handleCancel}>
               Cancel

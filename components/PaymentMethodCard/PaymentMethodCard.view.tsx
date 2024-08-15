@@ -1,5 +1,7 @@
 import styles from "./PaymentMethodCard.module.css";
 import { PaymentMethodCardProps } from "./PaymentMethodCard.props";
+
+import CreditCard from "@/components/CreditCard";
 import Text from "@/components/Text";
 
 export default (props: PaymentMethodCardProps) => {
@@ -24,13 +26,7 @@ export default (props: PaymentMethodCardProps) => {
       <div>
         <input checked={selected} readOnly type="radio" />
       </div>
-      <div className={styles["left-container"]}>
-        <Text weight="bold" style={{ textTransform: "uppercase" }}>
-          {brand}
-        </Text>
-        <Text>ending in</Text>
-        <Text>{last4}</Text>
-      </div>
+      <CreditCard brand={brand} last4={last4} />
       <Text>{`${
         10 < expiryMonth ? expiryMonth : `0${expiryMonth}`
       }/${expiryYear}`}</Text>

@@ -1,13 +1,19 @@
 .alignment-center {
   text-align: center;
+  justify-content: center;
+  justify-items: center;
 }
 
 .alignment-left {
   text-align: left;
+  justify-content: left;
+  justify-items: left;
 }
 
 .alignment-right {
   text-align: right;
+  justify-content: right;
+  justify-items: right;
 }
 
 .color-black {
@@ -30,6 +36,10 @@
   color: #cc0c39;
 }
 
+.color-teal {
+  color: #007185;
+}
+
 .color-white {
   color: white;
 }
@@ -47,6 +57,8 @@
 }
 
 .text {
+  align-items: center;
+  display: flex;
   font-family: "Amazon Ember", Arial, sans-serif;
 }
 

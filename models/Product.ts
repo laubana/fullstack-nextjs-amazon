@@ -1,4 +1,5 @@
 import { model, models, Schema } from "mongoose";
+
 import { DB } from "@/const/db";
 
 const ProductSchema = new Schema(

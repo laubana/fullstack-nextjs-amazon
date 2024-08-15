@@ -1,5 +1,6 @@
 import styles from "./ProfileMenu.module.css";
 import { ProfileMenuProps } from "./ProfileMenu.props";
+
 import Text from "@/components/Text";
 
 export default (props: ProfileMenuProps) => {

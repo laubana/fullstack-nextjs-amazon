@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { FaXmark } from "react-icons/fa6";
+
 import styles from "./Modal.module.css";
 import { ModalProps } from "./Modal.props";
 

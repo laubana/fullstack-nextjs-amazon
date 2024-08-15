@@ -4,17 +4,21 @@ import { Formik } from "formik";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
+
 import styles from "./PostingForm.module.css";
 import { PostingFormProps } from "./PostingForm.props";
+
 import AutoComplete from "@/components/AutoComplete";
 import Button from "@/components/Button";
 import InputText from "@/components/InputText";
 import ProductCard from "@/components/PostingCard";
 import ProductForm from "@/components/ProductForm";
 import Text from "@/components/Text";
-import { addPosting } from "@/services/posting";
-import { addPrice } from "@/services/price";
-import { addProduct } from "@/services/product";
+
+import { addPosting } from "@/controllers/posting";
+import { addPrice } from "@/controllers/price";
+import { addProduct } from "@/controllers/product";
+
 import { Posting, PostingFormValues } from "@/types/Posting";
 import { Price } from "@/types/Price";
 import { ProductFormValues } from "@/types/Product";

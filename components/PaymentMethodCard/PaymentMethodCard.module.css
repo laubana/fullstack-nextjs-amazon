@@ -6,11 +6,6 @@
   padding: 8px 16px;
 }
 
-.left-container {
-  display: flex;
-  gap: 4px;
-}
-
 .selected {
   background-color: #fcf5ee;
   border: 1px #fbd8b4 solid;

@@ -7,6 +7,7 @@ export interface CartCardProps {
   images: string[];
   onDelete: (values: CartDeletePayload) => void;
   onEdit: (values: CartEditPayload) => void;
+  postingId: string;
   price: number;
   productQuantity: number;
   title: string;

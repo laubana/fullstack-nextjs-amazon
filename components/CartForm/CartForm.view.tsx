@@ -4,13 +4,16 @@ import { Formik } from "formik";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
+
 import styles from "./CartForm.module.css";
 import { CartFormProps } from "./CartForm.props";
+
 import AutoComplete from "@/components/AutoComplete";
 import Button from "@/components/Button";
-import Loader from "@/components/Loader";
 import Text from "@/components/Text";
-import { addCart } from "@/services/cart";
+
+import { addCart } from "@/controllers/cart";
+
 import { CartFormValues } from "@/types/Cart";
 
 export default (props: CartFormProps) => {
@@ -31,11 +34,13 @@ export default (props: CartFormProps) => {
   });
 
   const handleSubmit = async (values: CartFormValues) => {
+    const { quantity } = values;
+
     setIsSubmitting(true);
 
     const cartFormData = new FormData();
     cartFormData.append("productId", productId);
-    cartFormData.append("quantity", values.quantity);
+    cartFormData.append("quantity", quantity);
 
     const cartResponse = await addCart(cartFormData);
 
@@ -90,7 +95,7 @@ export default (props: CartFormProps) => {
               onClick={handleSubmit}
               disabled={isSubmitting ? true : false}
             >
-              {isSubmitting ? <Loader /> : "Add to Card"}
+              Add to Cart
             </Button>
           </>
         )}

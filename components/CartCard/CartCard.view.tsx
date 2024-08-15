@@ -1,12 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
+
 import styles from "./CartCard.module.css";
 import { CartCardProps } from "./CartCard.props";
+
 import AutoComplete from "@/components/AutoComplete";
 import Button from "@/components/Button";
 import Carousel from "@/components/Carousel";
 import Text from "@/components/Text";
+
 import { Option } from "@/types/Option";
 
 export default (props: CartCardProps) => {
@@ -17,6 +21,7 @@ export default (props: CartCardProps) => {
     images,
     onDelete,
     onEdit,
+    postingId,
     price,
     productQuantity,
     title,
@@ -48,7 +53,9 @@ export default (props: CartCardProps) => {
       </div>
       <div className={styles.center}>
         <div>
-          <Text style={{ fontSize: "18px" }}>{title}</Text>
+          <Link href={`/postings/${postingId}`}>
+            <Text style={{ fontSize: "18px" }}>{title}</Text>
+          </Link>
           {productQuantity === 0 ? (
             <Text color="red" size="small">
               Out of Stock
@@ -60,7 +67,9 @@ export default (props: CartCardProps) => {
               </Text>
             </>
           )}
-          <Text color="grey">{description}</Text>
+          <Link href={`/postings/${postingId}`}>
+            <Text color="grey">{description}</Text>
+          </Link>
         </div>
         <div className={styles["controller-container"]}>
           <div className={styles["quantity-container"]}>

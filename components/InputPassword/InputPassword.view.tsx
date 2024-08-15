@@ -1,7 +1,9 @@
 import { ChangeEvent, FocusEvent, useState } from "react";
 import { FaEye, FaEyeSlash, FaRegCircleXmark } from "react-icons/fa6";
+
 import styles from "./InputPassword.module.css";
 import { InputPasswordProps } from "./InputPassword.props";
+
 import Text from "@/components/Text";
 
 export default (props: InputPasswordProps): JSX.Element => {

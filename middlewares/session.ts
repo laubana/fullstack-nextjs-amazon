@@ -1,5 +1,7 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOption";
+
+import { authOptions } from "@/configs/authOptions";
+
 import { CustomRequest } from "@/interfaces/CustomRequest";
 
 export default async (

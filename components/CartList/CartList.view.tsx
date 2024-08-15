@@ -3,14 +3,19 @@
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+
 import styles from "./CartList.module.css";
 import { CartListProps } from "./CartList.props";
+
 import Button from "@/components/Button";
 import CartCard from "@/components/CartCard";
 import Loader from "@/components/Loader";
 import Text from "@/components/Text";
+
 import { useStore } from "@/configs/store";
-import { editCart, getAllCarts, removeCart } from "@/services/cart";
+
+import { editCart, getAllCarts, removeCart } from "@/controllers/cart";
+
 import { Cart, CartDeletePayload, CartEditPayload } from "@/types/Cart";
 
 export default (props: CartListProps) => {
@@ -24,17 +29,23 @@ export default (props: CartListProps) => {
   const [cartIds, setCartIds] = useState<string[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [totalItemNumber, setTotalItemNumber] = useState<number>(0);
+  const [isProceeding, setIsProceeding] = useState<boolean>(false);
 
   const handleDelete = async (values: CartDeletePayload) => {
+    const { cartId } = values;
+
     const cartFormData = new FormData();
-    cartFormData.append("cartId", values.cartId);
+    cartFormData.append("cartId", cartId);
 
     const cartResponse = await removeCart(cartFormData);
 
     if (cartResponse.ok) {
       toast.success(cartResponse.message);
+      setCartIds((prevStates) =>
+        prevStates.filter((prevState) => prevState !== cartId)
+      );
       setCarts((prevStates) =>
-        prevStates.filter((prevState) => prevState._id !== values.cartId)
+        prevStates.filter((prevState) => prevState._id !== cartId)
       );
     } else {
       toast.error(cartResponse.message);
@@ -63,8 +74,12 @@ export default (props: CartListProps) => {
   };
 
   const handleProceed = async () => {
+    setIsProceeding(true);
+
     store.setCarts(carts.filter((cart) => cartIds.includes(cart._id)));
     router.push("/checkout");
+
+    setIsProceeding(false);
   };
 
   const handleToggle = (
@@ -116,11 +131,11 @@ export default (props: CartListProps) => {
   }, [carts]);
 
   return (
-    <div className={styles.container}>
+    <div>
       {isLoading ? (
         <Loader />
       ) : (
-        <>
+        <div className={styles.wrapper}>
           <div className={styles.left}>
             <Text style={{ fontSize: "28px" }}>Shopping Cart</Text>
             <div>
@@ -142,6 +157,7 @@ export default (props: CartListProps) => {
                         onDelete={handleDelete}
                         onEdit={handleEdit}
                         price={cart.product.price.value}
+                        postingId={cart.product.posting._id}
                         productQuantity={cart.product.quantity}
                         title={cart.product.description}
                       />
@@ -162,11 +178,15 @@ export default (props: CartListProps) => {
                 ${(totalPrice / 100).toFixed(2)}
               </Text>
             </div>
-            <Button block onClick={handleProceed}>
+            <Button
+              color="yellow"
+              disabled={isProceeding || cartIds.length === 0}
+              onClick={handleProceed}
+            >
               Proceed to Checkout
             </Button>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

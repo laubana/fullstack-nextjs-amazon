@@ -1,17 +1,21 @@
 "use client";
 
+import { FormEvent } from "react";
 import {
   PaymentElement,
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
+
 import { SetupFormProps } from "./SetupForm.props";
-import { FormEvent } from "react";
 import styles from "./SetupForm.module.css";
+
 import Button from "@/components/Button";
 import Loader from "@/components/Loader";
 import Text from "@/components/Text";
-import { addSetupIntent } from "@/services/stripe";
+
+import { addSetupIntent } from "@/controllers/stripe";
+
 import { SetupIntent } from "@/types/SetupIntent";
 
 export default (props: SetupFormProps) => {
@@ -41,7 +45,7 @@ export default (props: SetupFormProps) => {
       clientSecret: setupIntentData.client_secret,
       redirect: "if_required",
       confirmParams: {
-        return_url: "http://localhost:3000/",
+        return_url: "/",
       },
     });
 
@@ -57,7 +61,7 @@ export default (props: SetupFormProps) => {
           <div className={styles["stripe-container"]}>
             <PaymentElement
               options={{
-                business: { name: "Amazon" },
+                terms: { card: "never" },
               }}
             />
             <Text alignment="right" color="light-grey" size="small">

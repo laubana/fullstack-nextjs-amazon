@@ -2,8 +2,10 @@
 
 import { ChangeEvent, FocusEvent, useState } from "react";
 import { FaRegCircleXmark } from "react-icons/fa6";
+
 import styles from "./InputText.module.css";
 import { InputTextProps } from "./InputText.props";
+
 import Text from "@/components/Text";
 
 export default (props: InputTextProps) => {
