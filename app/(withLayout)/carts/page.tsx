@@ -3,8 +3,7 @@ import { getServerSession } from "next-auth";
 
 import styles from "./page.module.css";
 
-import CartList from "@/components/CartList";
-
+import CartList from "@/components/Lists/CartList";
 import { authOptions } from "@/configs/authOptions";
 
 export default async () => {

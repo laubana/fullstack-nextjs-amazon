@@ -1,11 +1,11 @@
 "use client";
 
 import { Formik } from "formik";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BuiltInProviderType } from "next-auth/providers/index";
 import { signIn, getProviders, ClientSafeProvider } from "next-auth/react";
-import Image from "next/image";
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
@@ -13,8 +13,8 @@ import * as Yup from "yup";
 import styles from "./page.module.css";
 
 import Button from "@/components/Button";
-import InputPassword from "@/components/InputPassword";
-import InputText from "@/components/InputText";
+import InputPassword from "@/components/Inputs/InputPassword";
+import InputText from "@/components/Inputs/InputText";
 import Text from "@/components/Text";
 
 export default () => {
@@ -25,8 +25,8 @@ export default () => {
   > | null>();
 
   const initialValues: { email: string; password: string } = {
-    email: "user@test.com",
-    password: "123123",
+    email: "",
+    password: "",
   };
 
   const validationSchema = Yup.object({
@@ -37,7 +37,13 @@ export default () => {
   });
 
   const handleOAuthSignIn = async (providerId: string) => {
-    await signIn(providerId, { callbackUrl: "/" });
+    try {
+      await signIn(providerId, { callbackUrl: "/" });
+    } catch (error) {
+      console.error(error);
+
+      toast.error("Sign-in Failed.");
+    }
   };
 
   const handleCredentialsSignIn = async (values: {
@@ -45,21 +51,21 @@ export default () => {
     password: string;
   }) => {
     try {
-      const response = await signIn("credentials", {
+      const signInResponse = await signIn("credentials", {
         redirect: false,
         email: values.email,
         password: values.password,
       });
 
-      if (response?.ok) {
+      if (signInResponse?.ok) {
         router.push("/");
       } else {
-        toast.error("Sign-in Failed.");
+        toast.error("Failed to sign in.");
       }
     } catch (error) {
       console.error(error);
 
-      toast.error("Sign-in Failed.");
+      toast.error("Failed to sign in.");
     }
   };
 
@@ -78,14 +84,14 @@ export default () => {
       <Link href="/">
         <Image
           className={styles.logo}
-          src="/logo.png"
+          src="/logo.svg"
           alt="logo"
           width={100}
           height={30}
         />
       </Link>
       <div className={styles.wrapper}>
-        <Text style={{ fontSize: "28px" }}>Sign in</Text>
+        <Text style={{ fontSize: "28px" }}>Sign In</Text>
         {providers && (
           <div className={styles.form}>
             <Formik
@@ -131,12 +137,12 @@ export default () => {
         </div>
       </div>
       <Text color="grey" size="small">
-        New to Amazon?
+        New to Tundra?
       </Text>
       <div className={styles["button-container"]}>
         <Link href="sign-up">
           <Button block color="white">
-            Create your Amazon account
+            Create Your Tundra Account
           </Button>
         </Link>
       </div>

@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+
 import styles from "./page.module.css";
+
 import Carousel from "@/components/Carousel";
-import CartForm from "@/components/CartForm";
+import CartForm from "@/components/Forms/CartForm";
 import Text from "@/components/Text";
 import { getProducts } from "@/controllers/product";
 import { Product } from "@/types/Product";
@@ -17,6 +19,7 @@ export default async ({ params }: { params: { params: string[] } }) => {
 
   const productsFormData = new FormData();
   productsFormData.append("postingId", postingId);
+
   const productsResponse = await getProducts(productsFormData);
 
   const products = productsResponse.data as Product[];

@@ -14,12 +14,14 @@ export default async () => {
   try {
     mongoose.set("strictQuery", false);
 
-    if (process.env.MONGO_URI) {
-      await mongoose.connect(process.env.MONGO_URI);
+    if (process.env.DB_URI) {
+      await mongoose.connect(process.env.DB_URI);
     } else {
-      console.error("DB not connected.");
+      console.error("Failed to authenticate 🚨");
     }
   } catch (error) {
     console.error(error);
+
+    console.error("Failed to connect to DB 🚨");
   }
 };

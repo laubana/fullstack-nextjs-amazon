@@ -7,9 +7,7 @@ import { IoSearchOutline } from "react-icons/io5";
 
 import styles from "./Search.module.css";
 import { SelectProps } from "./Search.props";
-
 import Text from "@/components/Text";
-
 import { useStore } from "@/configs/store";
 
 export default (props: SelectProps) => {

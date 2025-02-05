@@ -5,9 +5,9 @@ import { DB } from "@/const/db";
 const RefundSchema = new Schema(
   {
     isApproved: {
-      default: false,
       type: Boolean,
       required: [true, "IsApproved is required."],
+      default: false,
     },
     quantity: {
       type: Number,

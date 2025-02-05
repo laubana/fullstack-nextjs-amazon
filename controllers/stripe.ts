@@ -26,7 +26,7 @@ export const addPaymentIntent = async (props: FormData) => {
     }
 
     if (!userId) {
-      return { message: "Forbidden", ok: false };
+      return { message: "Unauthorized", ok: false };
     }
 
     await db();
@@ -56,7 +56,7 @@ export const addPaymentIntent = async (props: FormData) => {
     console.error(error);
 
     return {
-      message: "Server Error!",
+      message: "Server Error",
       ok: false,
     };
   }
@@ -68,7 +68,7 @@ export const addSetupIntent = async () => {
     const userId = session?.user?.id;
 
     if (!userId) {
-      return { message: "Forbidden", ok: false };
+      return { message: "Unauthorized", ok: false };
     }
 
     await db();
@@ -92,7 +92,7 @@ export const addSetupIntent = async () => {
     console.error(error);
 
     return {
-      message: "Server Error!",
+      message: "Server Error",
       ok: false,
     };
   }
@@ -104,7 +104,7 @@ export const getAllPaymentMethods = async () => {
     const userId = session?.user?.id;
 
     if (!userId) {
-      return { message: "Forbidden", ok: false };
+      return { message: "Unauthorized", ok: false };
     }
 
     await db();
@@ -128,7 +128,7 @@ export const getAllPaymentMethods = async () => {
     console.error(error);
 
     return {
-      message: "Server Error!",
+      message: "Server Error",
       ok: false,
     };
   }

@@ -3,9 +3,8 @@ import { getServerSession } from "next-auth";
 
 import styles from "./page.module.css";
 
-import CategoryForm from "@/components/CategoryForm";
+import CategoryForm from "@/components/Forms/CategoryForm";
 import Text from "@/components/Text";
-
 import { authOptions } from "@/configs/authOptions";
 
 export default async () => {

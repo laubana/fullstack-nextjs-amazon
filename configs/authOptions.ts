@@ -4,7 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
 import db from "@/configs/db";
-
+import { createCustomer } from "@/helpers/stripe";
 import User from "@/models/User";
 
 export const authOptions: AuthOptions = {
@@ -66,12 +66,21 @@ export const authOptions: AuthOptions = {
           }
         } else {
           if (account?.type === "oauth") {
-            await User.create({
-              email: profile?.email,
-              name: profile?.name,
-            });
+            if (profile?.email && profile?.name) {
+              const newCustomer = await createCustomer({
+                email: profile.email,
+                name: profile.name,
+              });
 
-            return true;
+              await User.create({
+                customerId: newCustomer.id,
+                email: profile.email,
+                name: profile.name,
+              });
+              return true;
+            } else {
+              return false;
+            }
           } else {
             return false;
           }

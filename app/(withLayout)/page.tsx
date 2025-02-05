@@ -11,11 +11,8 @@ import Button from "@/components/Button";
 import Loader from "@/components/Loader";
 import PostingGrid from "@/components/PostingGrid";
 import Text from "@/components/Text";
-
 import { useStore } from "@/configs/store";
-
 import { getAllProducts } from "@/controllers/product";
-
 import { Product } from "@/types/Product";
 
 export default () => {

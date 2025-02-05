@@ -3,9 +3,7 @@
 import bcryptjs from "bcryptjs";
 
 import db from "@/configs/db";
-
 import { createCustomer } from "@/helpers/stripe";
-
 import User from "@/models/User";
 
 export const signUp = async (props: FormData) => {
@@ -20,19 +18,19 @@ export const signUp = async (props: FormData) => {
 
     await db();
 
-    const oldUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email }).lean();
 
-    if (oldUser) {
-      return { message: "The email already exists.", ok: false };
+    if (existingUser) {
+      return { message: "Email already exists.", ok: false };
     }
 
     const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(password, salt);
 
-    const customer = await createCustomer({ name, email });
+    const newCustomer = await createCustomer({ name, email });
 
     await User.create({
-      customerId: customer.id,
+      customerId: newCustomer.id,
       email,
       name,
       password: hashedPassword,
@@ -42,6 +40,6 @@ export const signUp = async (props: FormData) => {
   } catch (error) {
     console.error(error);
 
-    return { message: "Server Error!", ok: false };
+    return { message: "Server Error", ok: false };
   }
 };

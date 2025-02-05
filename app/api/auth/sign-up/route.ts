@@ -1,4 +1,5 @@
 import bcryptjs from "bcryptjs";
+
 import connect from "@/configs/db";
 import User from "@/models/User";
 
@@ -12,12 +13,12 @@ export const POST = async (req: Request) => {
 
     await connect();
 
-    const oldUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email }).lean();
 
-    if (oldUser) {
+    if (existingUser) {
       return Response.json(
         {
-          message: "The email already exists.",
+          message: "Eemail already exists.",
         },
         { status: 409 }
       );
@@ -46,7 +47,7 @@ export const POST = async (req: Request) => {
 
     return Response.json(
       {
-        message: "Server Error!",
+        message: "Server Error",
       },
       {
         status: 500,

@@ -4,11 +4,8 @@ import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/configs/authOptions";
 import db from "@/configs/db";
-
 import { DB } from "@/const/db";
-
 import { confirmPaymentIntent, createPaymentIntent } from "@/helpers/stripe";
-
 import User from "@/models/User";
 import Cart from "@/models/Cart";
 import Transaction from "@/models/Transaction";
@@ -26,7 +23,7 @@ export const checkout = async (props: FormData) => {
     }
 
     if (!userId) {
-      return { message: "Forbidden", ok: false };
+      return { message: "Unauthorized", ok: false };
     }
 
     await db();

@@ -3,11 +3,8 @@
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/configs/authOptions";
-
 import db from "@/configs/db";
-
 import { DB } from "@/const/db";
-
 import Posting from "@/models/Posting";
 import Transaction from "@/models/Transaction";
 import User from "@/models/User";
@@ -18,7 +15,7 @@ export const getAllTransactions = async () => {
     const userId = session?.user?.id;
 
     if (!userId) {
-      return { message: "Forbidden", ok: false };
+      return { message: "Unauthorized", ok: false };
     }
 
     await db();
@@ -44,7 +41,7 @@ export const getAllTransactions = async () => {
     console.error(error);
 
     return {
-      message: "Server Error!",
+      message: "Server Error",
       ok: false,
     };
   }
@@ -56,7 +53,7 @@ export const getTransactions = async () => {
     const userId = session?.user?.id;
 
     if (!userId) {
-      return { message: "Forbidden", ok: false };
+      return { message: "Unauthorized", ok: false };
     }
 
     await db();
@@ -94,7 +91,7 @@ export const getTransactions = async () => {
     console.error(error);
 
     return {
-      message: "Server Error!",
+      message: "Server Error",
       ok: false,
     };
   }

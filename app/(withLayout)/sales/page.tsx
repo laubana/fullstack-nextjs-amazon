@@ -3,9 +3,8 @@ import { getServerSession } from "next-auth";
 
 import styles from "./page.module.css";
 
+import SaleList from "@/components/Lists/SaleList";
 import { authOptions } from "@/configs/authOptions";
-
-import SaleList from "@/components/SaleList";
 
 export default async () => {
   const session = await getServerSession(authOptions);

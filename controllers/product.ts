@@ -4,12 +4,9 @@ import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/configs/authOptions";
 import db from "@/configs/db";
-
 import { DB } from "@/const/db";
-
 import { uploadImage } from "@/helpers/s3";
 import { createPrice, createProduct } from "@/helpers/stripe";
-
 import Posting from "@/models/Posting";
 import User from "@/models/User";
 import Price from "@/models/Price";
@@ -39,7 +36,7 @@ export const addProduct = async (props: FormData) => {
     }
 
     if (!userId) {
-      return { message: "Forbidden", ok: false };
+      return { message: "Unauthorized", ok: false };
     }
 
     await db();
@@ -99,7 +96,7 @@ export const addProduct = async (props: FormData) => {
     console.error(error);
 
     return {
-      message: "Server Error!",
+      message: "Server Error",
       ok: false,
     };
   }
@@ -129,7 +126,7 @@ export const getAllProducts = async () => {
     console.error(error);
 
     return {
-      message: "Server Error!",
+      message: "Server Error",
       ok: false,
     };
   }
@@ -158,7 +155,7 @@ export const getProducts = async (props: FormData) => {
     console.error(error);
 
     return {
-      message: "Server Error!",
+      message: "Server Error",
       ok: false,
     };
   }

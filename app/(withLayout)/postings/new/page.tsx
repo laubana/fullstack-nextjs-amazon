@@ -1,8 +1,7 @@
 import styles from "./page.module.css";
 
-import PostingForm from "@/components/PostingForm";
+import PostingForm from "@/components/Forms/PostingForm";
 import Text from "@/components/Text";
-
 import { getAllCategories } from "@/controllers/category";
 
 export default async () => {

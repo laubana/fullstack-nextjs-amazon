@@ -3,8 +3,7 @@ import { getServerSession } from "next-auth";
 
 import styles from "./page.module.css";
 
-import OrderList from "@/components/OrderList";
-
+import OrderList from "@/components/Lists/OrderList";
 import { authOptions } from "@/configs/authOptions";
 
 export default async () => {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+
 import { Position } from "@/types/Position";
 
 export default () => {

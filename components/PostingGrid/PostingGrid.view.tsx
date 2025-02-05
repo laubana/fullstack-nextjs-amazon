@@ -1,7 +1,7 @@
 import styles from "./PostingGrid.module.css";
 import { PostingGridProps } from "./PostingGrid.props";
 
-import PostingCard from "@/components/PostingCard";
+import PostingCard from "@/components/Cards/PostingCard";
 import Text from "@/components/Text";
 
 export default (props: PostingGridProps) => {

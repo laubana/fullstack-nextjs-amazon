@@ -4,7 +4,6 @@ import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/configs/authOptions";
 import db from "@/configs/db";
-
 import Price from "@/models/Price";
 import User from "@/models/User";
 
@@ -19,7 +18,7 @@ export const addPrice = async (props: FormData) => {
     }
 
     if (!userId) {
-      return { message: "Forbidden", ok: false };
+      return { message: "Unauthorized", ok: false };
     }
 
     await db();
@@ -41,7 +40,7 @@ export const addPrice = async (props: FormData) => {
     console.error(error);
 
     return {
-      message: "Server Error!",
+      message: "Server Error",
       ok: false,
     };
   }

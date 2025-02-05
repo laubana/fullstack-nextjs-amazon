@@ -4,7 +4,6 @@ import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/configs/authOptions";
 import db from "@/configs/db";
-
 import Category from "@/models/Category";
 
 export const addCategory = async (props: FormData) => {
@@ -27,7 +26,7 @@ export const addCategory = async (props: FormData) => {
 
     if (oldCategory) {
       return {
-        message: "The name already exists.",
+        message: "Name already exists.",
         ok: false,
       };
     }
@@ -45,7 +44,7 @@ export const addCategory = async (props: FormData) => {
     console.error(error);
 
     return {
-      message: "Server Error!",
+      message: "Server Error",
       ok: false,
     };
   }
@@ -66,7 +65,7 @@ export const getAllCategories = async () => {
     console.error(error);
 
     return {
-      message: "Server Error!",
+      message: "Server Error",
       ok: false,
     };
   }

@@ -13,9 +13,7 @@ import styles from "./SetupForm.module.css";
 import Button from "@/components/Button";
 import Loader from "@/components/Loader";
 import Text from "@/components/Text";
-
 import { addSetupIntent } from "@/controllers/stripe";
-
 import { SetupIntent } from "@/types/SetupIntent";
 
 export default (props: SetupFormProps) => {
@@ -68,7 +66,7 @@ export default (props: SetupFormProps) => {
               Powered by Stripe
             </Text>
           </div>
-          <Button type="submit">Add and continue</Button>
+          <Button type="submit">Add and Continue</Button>
         </form>
       ) : (
         <Loader />

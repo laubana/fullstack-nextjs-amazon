@@ -5,12 +5,8 @@ import styles from "./Header.module.css";
 
 import Select from "@/components/Search";
 import Text from "@/components/Text";
-
 import { getAllCategories } from "@/controllers/category";
-
-import Delivery from "@/layouts/Delivery";
 import User from "@/layouts/User/User";
-
 import { Category } from "@/types/Category";
 
 export default async () => {

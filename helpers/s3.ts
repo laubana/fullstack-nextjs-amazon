@@ -19,7 +19,7 @@ export const uploadImage = async (props: { image: File }) => {
 
   const params = {
     Bucket: process.env.AWS_BUCKET_NAME,
-    Key: `amazon/images/${filename}`,
+    Key: `tundra/images/${filename}`,
     Body: Buffer.from(bufferedImage),
     ContentType: image.type,
   };
@@ -27,5 +27,5 @@ export const uploadImage = async (props: { image: File }) => {
   const command = new PutObjectCommand(params);
   await s3.send(command);
 
-  return `${process.env.AWS_URL}/amazon/images/${filename}`;
+  return `${process.env.AWS_URL}/tundra/images/${filename}`;
 };

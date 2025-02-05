@@ -4,11 +4,8 @@ import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/configs/authOptions";
 import db from "@/configs/db";
-
 import { DB } from "@/const/db";
-
 import { createRefund } from "@/helpers/stripe";
-
 import Purchase from "@/models/Purchase";
 import Refund from "@/models/Refund";
 import User from "@/models/User";
@@ -24,14 +21,14 @@ export const approveRefund = async (props: FormData) => {
     }
 
     if (!userId) {
-      return { message: "Forbidden", ok: false };
+      return { message: "Unauthorized", ok: false };
     }
 
     await db();
 
-    const user = await User.findById(userId);
+    const existingUser = await User.findById(userId);
 
-    if (!user) {
+    if (!existingUser) {
       return { message: "No user found.", ok: false };
     }
 

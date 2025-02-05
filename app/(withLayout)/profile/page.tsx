@@ -5,7 +5,6 @@ import styles from "./page.module.css";
 
 import ProfileMenu from "@/components/ProfileMenu";
 import Text from "@/components/Text";
-
 import { authOptions } from "@/configs/authOptions";
 
 const menus = [

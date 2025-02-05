@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 
 import styles from "./page.module.css";
 
-import CheckoutForm from "@/components/CheckoutForm";
+import CheckoutForm from "@/components/Forms/CheckoutForm";
 import { authOptions } from "@/configs/authOptions";
 
 export default async () => {

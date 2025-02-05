@@ -4,9 +4,7 @@ import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/configs/authOptions";
 import db from "@/configs/db";
-
 import { DB } from "@/const/db";
-
 import Cart from "@/models/Cart";
 import Product from "@/models/Product";
 import User from "@/models/User";
@@ -23,7 +21,7 @@ export const addCart = async (props: FormData) => {
     }
 
     if (!userId) {
-      return { message: "Forbidden", ok: false };
+      return { message: "Unauthorized", ok: false };
     }
 
     await db();
@@ -44,7 +42,7 @@ export const addCart = async (props: FormData) => {
 
     if (oldCart) {
       return {
-        message: "The product already exists.",
+        message: "Product already exists.",
         ok: false,
       };
     }
@@ -64,7 +62,7 @@ export const addCart = async (props: FormData) => {
     console.error(error);
 
     return {
-      message: "Server Error!",
+      message: "Server Error",
       ok: false,
     };
   }
@@ -82,7 +80,7 @@ export const editCart = async (props: FormData) => {
     }
 
     if (!userId) {
-      return { message: "Forbidden", ok: false };
+      return { message: "Unauthorized", ok: false };
     }
 
     await db();
@@ -114,7 +112,7 @@ export const editCart = async (props: FormData) => {
     console.error(error);
 
     return {
-      message: "Server Error!",
+      message: "Server Error",
       ok: false,
     };
   }
@@ -126,7 +124,7 @@ export const getAllCarts = async () => {
     const userId = session?.user?.id;
 
     if (!userId) {
-      return { message: "Forbidden", ok: false };
+      return { message: "Unauthorized", ok: false };
     }
 
     await db();
@@ -160,7 +158,7 @@ export const getAllCarts = async () => {
     console.error(error);
 
     return {
-      message: "Server Error!",
+      message: "Server Error",
       ok: false,
     };
   }
@@ -177,7 +175,7 @@ export const removeCart = async (props: FormData) => {
     }
 
     if (!userId) {
-      return { message: "Forbidden", ok: false };
+      return { message: "Unauthorized", ok: false };
     }
 
     await db();
@@ -206,7 +204,7 @@ export const removeCart = async (props: FormData) => {
     console.error(error);
 
     return {
-      message: "Server Error!",
+      message: "Server Error",
       ok: false,
     };
   }

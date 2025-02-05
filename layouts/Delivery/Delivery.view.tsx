@@ -4,8 +4,10 @@ import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { fromLatLng, setKey, setLanguage } from "react-geocode";
 import { IoLocationOutline } from "react-icons/io5";
+
 import styles from "./Delivery.module.css";
 import { DeliveryProps } from "./Delivery.props";
+
 import Text from "@/components/Text";
 import { Position } from "@/types/Position";
 
