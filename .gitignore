@@ -4,7 +4,6 @@
 /yarn.lock
 /*.db
 /db.json
-next-env.d.ts
 
 /node_modules
 /.next
